@@ -5,7 +5,7 @@
 #     include pow::install
 class pow::install {
   package { 'pow':
-    ensure   => 'latest',
+    ensure   => $pow::version,
     provider => 'homebrew'
   }
 
