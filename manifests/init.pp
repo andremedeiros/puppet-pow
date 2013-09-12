@@ -3,13 +3,13 @@
 # Usage:
 #
 #     include pow
-class pow {
-  package { 'pow':
-    ensure   => 'latest',
-    provider => 'homebrew'
-  }
-
-  file { "/Users/${boxen::config::login}/.pow":
-    ensure => directory
-  }
+class pow(
+  $version = 'latest',
+  $enable  = true
+) {
+  class{'pow::install': } ->
+  class{'pow::service': } ->
+  Class['pow']
 }
+
+

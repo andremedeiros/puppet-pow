@@ -1,10 +1,10 @@
-# Installs Pow and the services
+# Sets up the Pow services
 #
 # Usage:
 #
 #     include pow::service
 class pow::service {
-  require pow
+  $ensure = $pow::enable ? {true => running, default => stopped}
 
   exec { 'install pow firewall rules':
     user    => root,
@@ -18,7 +18,7 @@ class pow::service {
   }
 
   service { 'cx.pow.firewall':
-    ensure  => running,
+    ensure  => $ensure,
     require => [
       Exec['install pow firewall rules'],
       Exec['install pow server']
