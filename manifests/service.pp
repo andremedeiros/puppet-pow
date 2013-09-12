@@ -8,13 +8,11 @@ class pow::service {
 
   exec { 'install pow firewall rules':
     user    => root,
-    command => 'pow --install-system',
-    require => Package['pow']
+    command => 'pow --install-system'
   }
 
   exec { 'install pow server':
-    command => 'pow --install-local',
-    require => Package['pow']
+    command => 'pow --install-local'
   }
 
   service { 'cx.pow.firewall':
