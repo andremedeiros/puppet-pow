@@ -1,11 +1,14 @@
-# Installs the Pow services
+# Installs Pow and the services
 #
 # Usage:
 #
 #     include pow::service
 class pow::service {
+  require pow
+
   exec { 'install pow firewall rules':
-    command => 'sudo pow --install-system',
+    user    => root,
+    command => 'pow --install-system',
     require => Package['pow']
   }
 
