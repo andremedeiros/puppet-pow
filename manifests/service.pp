@@ -7,17 +7,18 @@ class pow::service {
   $ensure = $pow::enable ? {true => running, default => stopped}
 
   exec { 'install pow firewall rules':
-    user    => root,
-    command => 'pow --install-system'
+    user      => root,
+    command   => 'pow --install-system',
+    timeout   => 10,
+    logoutput => true
   }
 
   exec { 'install pow server':
-    command => 'pow --install-local'
+    command   => 'pow --install-local',
+    timeout   => 10,
+    logoutput => true
   }
 
-  exec { 'export env':
-    command => 'env > /tmp/puppet_boxen_env'
-  }
 
   service { 'cx.pow.firewall':
     ensure  => $ensure,
