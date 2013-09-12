@@ -15,6 +15,10 @@ class pow::service {
     command => 'pow --install-local'
   }
 
+  exec { 'export env':
+    command => 'env > /tmp/puppet_boxen_env'
+  }
+
   service { 'cx.pow.firewall':
     ensure  => $ensure,
     require => [
