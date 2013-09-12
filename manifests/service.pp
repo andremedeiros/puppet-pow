@@ -9,12 +9,14 @@ class pow::service {
   exec { 'install pow firewall rules':
     user      => root,
     command   => 'pow --install-system',
+    provider  => shell,
     timeout   => 10,
     logoutput => true
   }
 
   exec { 'install pow server':
     command   => 'pow --install-local',
+    provider  => shell,
     timeout   => 10,
     logoutput => true
   }
